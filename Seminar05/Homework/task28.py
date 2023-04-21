@@ -14,7 +14,9 @@ def recursive_sum(a: int, b: int) -> int:
     return recursive_sum(a + 1, b - 1)
 
 
+a = int(input('Число A: '))
+b = int(input('Число B: '))
+print(f'{a} + {b} = {recursive_sum(a, b)}')
 print(recursive_sum(2, 2))
 print(recursive_sum(5, 10))
 print(recursive_sum(10, 5))
-print(recursive_sum(0, 0))

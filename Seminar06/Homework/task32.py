@@ -12,17 +12,12 @@ Output: [1, 9, 13, 14, 19]
 
 
 def in_diapason(lst: list, start: int, end: int) -> list:
-    new_lst = list()
-    for i in lst:
-        if i in range(start, end + 1):
-            new_lst.append(lst.index(i))
-    return new_lst
+    return [k for k, v in enumerate(lst)
+            if v in range(start, end + 1)]
 
 
 user_list = list(map(int, input(
-    "Введите список чисел: ").split(", ")))
-print(user_list)
+    "Введите список чисел через запятую: ").split(", ")))
 start, end = list(map(int, input(
-    "Введите начало и конец диапазона: ").split()))
-print(start, end)
+    "Введите начало и конец диапазона через пробел: ").split()))
 print(in_diapason(user_list, start, end))

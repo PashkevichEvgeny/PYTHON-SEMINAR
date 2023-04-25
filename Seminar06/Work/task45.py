@@ -26,14 +26,44 @@
 ---------------------------------------
 Input: 300   -> Output: 220 284
 '''
+import time
 
-n = []
-for i in range(1, 10000):
-    digit = sum([k for k in range(1, i // 2 + 1) if i % k == 0])
-    if digit != 1 and digit > i // 2:
-        n.append((i, digit))
-print(n)
-print(*(k for (k, kk) in n if (kk, k) in n and k != kk))
-# n2 = [(i, sum([k for k in range(
-#     1, i // 2 + 1) if i % k == 0])) for i in range(100, 90000)]
-# print(*(k for (k, kk) in n2 if (kk, k) in n2 and k != kk))
+
+def friendly_numbers(n: int) -> None:
+    # Словарь для хранения - Число: Сумма_делителей
+    d = dict()
+    # Берем каждое число от 1 до n
+    for i in range(1, n):
+        # Считаем сумму делителей для этого числа
+        sum_div = sum([k for k in range(1, i // 2 + 1) if i % k == 0])
+        # Если сумма делителей не равно 1 и больше чем половина числа
+        if sum_div != 1 and sum_div > i // 2:
+            # Добавляем в словарь число и сумму делителей
+            d[i] = sum_div
+        # Если сумма больше числа и
+        # для суммы есть такое же число по значению в словаре и
+        # оно равно числу
+        if sum_div < i and sum_div in d and d[sum_div] == i:
+            # Выводим на печать такие значения
+            print(sum_div, i)
+
+
+def friendly_numbers2(n: int) -> None:
+    lst = []
+    for i in range(1, n):
+        digit = sum([k for k in range(1, i // 2 + 1) if i % k == 0])
+        if digit != 1 and digit > i // 2:
+            lst.append((i, digit))
+    print(*(key for (key, value) in lst if (
+        value, key) in lst and key != value))
+
+
+num = 20000
+
+start = time.time()
+friendly_numbers(num)
+print(f'Время выполнения со словарем: {time.time() - start}')
+
+start = time.time()
+friendly_numbers2(num)
+print(f'Время выполнения со списком: {time.time() - start}')

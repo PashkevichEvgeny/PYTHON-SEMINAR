@@ -7,3 +7,10 @@
 Input: 1 2 3 2 3    -> Output: 2
 '''
 
+
+def count_pairs(lst: list) -> int:
+    return sum([lst.count(i) // 2 for i in set(lst)])
+
+
+f = list(map(int, input("Значения через пробел: ").split()))
+print(count_pairs(f))

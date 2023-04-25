@@ -15,3 +15,11 @@ Output:
 (каждое число вводится с новой строки)
 '''
 
+
+def not_in_second(first: list, second: list) -> list:
+    return [i for i in first if i not in second]
+
+
+f = list(map(int, input("Значения через пробел: ").split()))
+s = list(map(int, input("Значения через пробел: ").split()))
+print(not_in_second(f, s))

@@ -29,15 +29,19 @@ Input: 300   -> Output: 220 284
 import time
 
 
-def friendly_numbers(n: int) -> None:
+def amicably_numbers(n: int) -> None:
     # Словарь для хранения - Число: Сумма_делителей
     d = dict()
     # Берем каждое число от 1 до n
     for i in range(1, n):
         # Считаем сумму делителей для этого числа
-        sum_div = sum([k for k in range(1, i // 2 + 1) if i % k == 0])
+        s = 1
+        # Если число нечетное, убираем из перебора четные числа
+        if i % 2:
+            s = 2
+        sum_div = sum([k for k in range(1, i // 2 + 1, s) if i % k == 0])
         # Если сумма делителей не равно 1 и больше чем половина числа
-        if sum_div != 1 and sum_div > i // 2:
+        if sum_div != 1 and sum_div > i // 3 * 2:
             # Добавляем в словарь число и сумму делителей
             d[i] = sum_div
         # Если сумма больше числа и
@@ -48,11 +52,14 @@ def friendly_numbers(n: int) -> None:
             print(sum_div, i)
 
 
-def friendly_numbers2(n: int) -> None:
+def amicable_numbers2(n: int) -> None:
     lst = []
     for i in range(1, n):
-        digit = sum([k for k in range(1, i // 2 + 1) if i % k == 0])
-        if digit != 1 and digit > i // 2:
+        s = 1
+        if i % 2:
+            s = 2
+        digit = sum([k for k in range(1, i // 2 + 1, s) if i % k == 0])
+        if digit != 1 and digit > i // 3 * 2:
             lst.append((i, digit))
     print(*(key for (key, value) in lst if (
         value, key) in lst and key != value))
@@ -61,9 +68,9 @@ def friendly_numbers2(n: int) -> None:
 num = 20000
 
 start = time.time()
-friendly_numbers(num)
+amicably_numbers(num)
 print(f'Время выполнения со словарем: {time.time() - start}')
 
 start = time.time()
-friendly_numbers2(num)
+amicable_numbers2(num)
 print(f'Время выполнения со списком: {time.time() - start}')

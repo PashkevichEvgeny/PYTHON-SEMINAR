@@ -16,9 +16,12 @@ Output:
 
 
 def rhythm(phrase: str) -> str:
+    # Разбиваю строку по пробелам и убираю согласные в словах
     phrase = ''.join(filter(lambda x: x in 'аеёиоуыэюя ', phrase)).split()
-    phrase = all(map(lambda x: len(x) == len(phrase[0]), phrase))
-    return 'Парам пам-пам' if phrase else 'Пам парам'
+    # Проверяю равна ли длина всех слов
+    check_rhythm = all(map(lambda x: len(x) == len(phrase[0]), phrase))
+    # Возвращаю соответствующую строку
+    return 'Парам пам-пам' if check_rhythm else 'Пам парам'
 
 
 print(rhythm('пара-ра-рам рам-пам-папам па-ра-па-дам'))

@@ -20,13 +20,17 @@ Output:
 
 
 def print_operation_table(operation, num_columns=6, num_rows=6):
+    # Создаю диапазоны от 1 до конца + 1
     cols, rows = map(lambda x: range(1, x + 1), (num_columns, num_rows))
-    [print(
-        *[''.join(str(operation(col, row)).ljust(2)) for row in rows])
-        for col in cols
+    [print(                        # Распечатываю получившиеся строки
+        *[''.join(str(             # Соединяю в выровненную строку
+            operation(col, row)    # Применение заданной функции
+            ).ljust(2))
+            for row in rows])      # Перебор значений по горизонтали
+        for col in cols            # Перебор значений по вертикали
      ]
 
 
 print_operation_table(lambda x, y: x * y)
 print()
-print_operation_table(lambda x, y: x & ~y)
+print_operation_table(lambda x, y: x - y)

@@ -16,6 +16,8 @@ def add_data() -> None:
             fio = input('Фамилия Имя Отчество: ').split()
         fio = ' '.join(map(lambda x: x.capitalize(), fio))
         phone = input(f'Телефон {fio}: ')
+        while not phone.isdigit():
+            phone = input(f'Телефон из цифр {fio}: ')
         inf.write(f'{fio} | {phone}\n')
     print(f'Запись: {fio} тел.{phone} добавлена')
 
